@@ -1901,7 +1901,7 @@ function spawnJellyfish() {
 
   jellyContainer.appendChild(jelly);
 
-  setTimeout(() => jelly.remove(), 40000);
+  setTimeout(() => jelly.remove(), 80000);
 }
 
 /* Spawn Loop */
