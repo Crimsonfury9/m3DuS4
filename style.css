@@ -1,0 +1,709 @@
+body {
+  margin: 0;
+  background: black;
+  font-family: monospace;
+  color: white;
+  overflow: hidden;
+}
+
+/* ===== DESKTOP ===== */
+
+#desktop {
+  position: relative;
+  height: calc(100vh - 40px);
+
+  background:
+    repeating-radial-gradient(circle, #000 0px, #000 1px, #111 1px, #111 2px);
+}
+
+/* ===== WINDOWS ===== */
+
+.window {
+  position: absolute;
+  width: 420px;
+  background: black;
+  border: 2px solid white;
+}
+
+.titlebar {
+  background: white;
+  color: black;
+  padding: 4px;
+  font-weight: bold;
+  cursor: move;
+  border-bottom: 2px solid white;
+}
+
+.content {
+  padding: 10px;
+  height: 240px;
+  overflow-y: auto;
+}
+
+/* ===== TASKBAR ===== */
+
+#taskbar {
+  height: 40px;
+  min-height: 40px;
+  max-height: 40px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+
+  transform: translateZ(0);  /* 🚨 Forces GPU layer */
+  font-size: 14px;
+  line-height: 1;
+  border-top: 2px solid white;
+  flex-shrink: 0;
+  will-change: opacity;
+  backface-visibility: hidden;
+  transition: opacity 3.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.task {
+  border: 1px solid white;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.task.right {
+  margin-left: auto;
+}
+
+/* ===== START MENU ===== */
+
+#startMenu {
+  position: fixed;
+  bottom: 45px;
+  left: 5px;
+  width: 180px;
+  background: black;
+  border: 2px solid white;
+  z-index: 99999;
+}
+
+.menu-item {
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background: white;
+  color: black;
+}
+
+.menu-divider {
+  border-top: 1px solid white;
+  margin: 4px 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+/* ===== INPUT ===== */
+
+input {
+  width: 100%;
+  background: black;
+  border: 1px solid white;
+  color: white;
+  font-family: monospace;
+}
+
+/* ===== PIXEL JELLY ICON ===== */
+
+.jelly-icon {
+  width: 2px;
+  height: 2px;
+  background: white;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+
+  box-shadow:
+    2px 0 white, 4px 0 white,
+    0 2px white, 2px 2px white, 4px 2px white, 6px 2px white,
+    0 4px white, 2px 4px white, 4px 4px white, 6px 4px white,
+    2px 6px white, 4px 6px white;
+}
+
+/* ===== JELLYFISH ===== */
+
+.jelly {
+  position: absolute;
+  width: 60px;
+  height: 80px;
+  bottom: -120px;
+  opacity: 0.15;
+  animation: jellyRise linear infinite;
+}
+
+.bell {
+  width: 100%;
+  height: 42px;
+  background: rgba(255,255,255,0.18);
+  border-radius: 50% 50% 40% 40% / 90% 90% 35% 35%;
+  position: relative;
+}
+
+.skirt {
+  position: absolute;
+  bottom: -2px;
+  width: 100%;
+  height: 10px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 50%;
+}
+
+.tentacles {
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.tentacles span {
+  width: 2px;
+  height: 38px;
+  background: rgba(255,255,255,0.22);
+  animation: tentacleWave 3s ease-in-out infinite;
+}
+
+@keyframes jellyRise {
+  from { transform: translateY(110vh); }
+  to { transform: translateY(-150vh); }
+  0%   { transform: translateY(110vh) translateX(0); }
+  25%  { transform: translateY(70vh) translateX(-12px); }
+  50%  { transform: translateY(30vh) translateX(10px); }
+  75%  { transform: translateY(-40vh) translateX(-6px); }
+  100% { transform: translateY(-150vh) translateX(0); }
+}
+
+
+
+@keyframes tentacleWave {
+  0%,100% { transform: rotate(0deg); }
+  50% { transform: rotate(10deg); }
+}
+/* ===== BOOT SCREEN ===== */
+
+#bootScreen {
+  position: fixed;
+  inset: 0;
+  background: black;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: monospace;
+  font-size: 18px;
+
+  z-index: 999999;
+  overflow: hidden;
+  opacity:1;
+}
+
+/* CRT Scanlines */
+#bootScreen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.04) 0px,
+      rgba(255,255,255,0.04) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+
+  pointer-events: none;
+}
+
+/* Glitch flicker */
+.glitch {
+  animation: glitchFlicker 0.15s infinite;
+}
+
+@keyframes glitchFlicker {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(2px, -1px); }
+  60% { transform: translate(-1px, 0); }
+  80% { transform: translate(1px, 1px); }
+  100% { transform: translate(0); }
+}
+
+/* Hide boot screen */
+.boot-fade-ui {
+  animation: bootFadeUI 1.2s ease forwards;
+}
+
+@keyframes bootFadeUI {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+
+@keyframes bootFade {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+/* ===== BOOT JELLYFISH ===== */
+
+#bootJelly {
+  position: absolute;
+  width: 240px;
+
+  opacity: 0;
+  pointer-events: none;
+
+  z-index: 5;  /* stays visible */
+}
+
+
+/* Distortion animation */
+.jelly-distort {
+  animation: jellyGlitch 0.12s infinite;
+}
+
+@keyframes jellyGlitch {
+  0% { transform: translate(0); }
+  25% { transform: translate(-6px, 2px); }
+  50% { transform: translate(4px, -3px); }
+  75% { transform: translate(-2px, 1px); }
+  100% { transform: translate(0); }
+}
+#bootJelly {
+  animation: jellyBreath 4s ease-in-out infinite;
+}
+
+@keyframes jellyBreath {
+  0%,100% { opacity: 0.25; }
+  50% { opacity: 0.45; }
+}
+.desktop-bleed {
+  animation: desktopBleed 2.5s ease;
+}
+
+@keyframes desktopBleed {
+  0%   { filter: blur(6px) brightness(1.4); }
+  40%  { filter: blur(3px) brightness(1.2); }
+  100% { filter: blur(0px) brightness(1); }
+}
+#osLayer {
+  opacity: 0;
+  transition: opacity 3.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#bootText {
+  position: relative;
+  z-index: 10;     /* ABOVE glitch layers */
+  opacity: 1;      /* 🚨 Critical */
+}
+#bootScreen::before {
+  z-index: 1;
+}
+
+#bootJelly {
+  z-index: 5;
+}
+
+#bootText {
+  z-index: 10;   /* Always topmost */
+}
+#bootScreen {
+  isolation: isolate;
+}
+.desktop-icon {
+  position: absolute;
+  width: 64px;
+  text-align: center;
+  cursor: pointer;
+  pointer-events: auto;
+  color: white;
+  font-size: 12px;
+
+  animation: iconSpawn 0.35s ease;
+}
+
+/* Glitch burst */
+@keyframes iconSpawn {
+  0% {
+    opacity: 0;
+    transform: scale(1.8) translateX(-10px);
+    filter: blur(4px);
+  }
+
+  40% {
+    opacity: 0.6;
+    transform: scale(0.8) translateX(6px);
+    filter: blur(1px);
+  }
+
+  70% {
+    opacity: 0.3;
+    transform: scale(1.2) translateX(-4px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+.minimized {
+  visibility: hidden;
+  pointer-events: none;
+}
+#ritualIcon {
+  left: 40px;
+  top: 40px;
+}
+.icon-gif {
+  width: 32px;
+  height: 32px;
+
+  object-fit: cover;
+
+  border: 1px solid white;
+  background: black;
+
+  image-rendering: pixelated;   /* VERY NICE for retro */
+}
+.icon-gif {
+  animation: iconFlicker 0s infinite;
+}
+
+@keyframes iconFlicker {
+  0%,100% { opacity: 1; }
+  96% { opacity: 0.4; }
+  98% { opacity: 1; }
+}
+.window {
+  transition:
+    transform 0.18s ease,
+    opacity 0.18s ease,
+    filter 0.18s ease;
+
+  transform-origin: center;
+}
+.window-opening {
+  animation: windowOpen 0.18s ease forwards;
+}
+
+@keyframes windowOpen {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+    filter: blur(6px);
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+.window-closing {
+  animation: windowClose 0.16s ease forwards;
+}
+
+@keyframes windowClose {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(0.75);
+    opacity: 0;
+  }
+}
+.window-opening {
+  filter: blur(2px);
+}
+@keyframes windowOpen {
+  0%   { transform: scale(0.6); opacity: 0; }
+  60%  { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); }
+}
+.start-jelly {
+  width: 18px;
+  height: 18px;
+
+  margin-right: 6px;
+}
+
+.start-jelly {
+  filter: contrast(1.4) brightness(1.2);
+}
+.start-jelly {
+  animation: jellyIconFlicker 7s infinite;
+}
+
+@keyframes jellyIconFlicker {
+  0%,100% { opacity: 1; }
+  96% { opacity: 0.5; }
+  98% { opacity: 1; }
+}
+#startButton {
+  height: 30px;              /* smaller than taskbar */
+  padding: 2px 8px;          /* tighter */
+  display: flex;
+  align-items: center;
+}
+#startButton {
+  line-height: 1;
+}
+.task {
+  height: 30px;
+  padding: 2px 10px;
+
+  display: flex;
+  align-items: center;
+
+  box-sizing: border-box;
+}
+#text {
+  white-space: pre-wrap;      /* 🚨 KEY FIX */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+
+  overflow-x: hidden;         /* 🚨 Kills horizontal scrollbar */
+}
+.window .content {
+  overflow-x: hidden;
+}
+.window {
+  overflow: hidden;
+}
+.icon {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  border: 1px solid white;
+  padding: 6px;
+}
+
+#helpIcon {
+  left: 90px;
+  top: 20px;
+}
+
+#helpWindow .content {
+  width: fit-content;
+  height: auto !important;
+  white-space: pre;
+}
+
+#helpWindow {
+  display: inline-block;
+  width: fit-content;
+}
+#terminal::after {
+  content: "▮";
+  animation: cursorBlink 1s infinite;
+}
+
+@keyframes cursorBlink {
+  0%,50% { opacity: 1; }
+  51%,100% { opacity: 0; }
+}
+.window {
+  transition: left 0.18s ease-out, top 0.18s ease-out;
+}
+.desktop-icon img {
+    width: 40px;
+    height: 40px;
+    image-rendering: pixelated;
+}
+.task.hidden {
+    display: none !important;
+}
+.hidden {
+    display: none !important;
+}
+
+
+.centered-text {
+  text-align: center;
+  margin: 12px 0;
+  opacity: 0.9;
+}
+.ritual-line {
+  margin: 6px 0;
+}
+#text {
+  height: 100%;
+  overflow-y: auto;
+  padding: 10px;
+}
+.ritual-content {
+  height: 320px;   
+  display: flex;
+  flex-direction: column;
+}
+#text {
+  flex: 1;                     
+  overflow-y: auto;
+  padding: 6px;
+}
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  border-top: 1px solid white;
+  padding-top: 6px;
+}
+.input-row input {
+  flex: 1;
+}
+.input-row span {
+  opacity: 0.7;
+}
+#achievementBar {
+  position: fixed;
+  bottom: 42px;              /* sits just above taskbar */
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  gap: 6px;
+
+  padding: 6px 10px;
+
+  background: black;
+  border: 1px solid white;
+
+  z-index: 9999;
+}
+.achievement-icon {
+  width: 22px;
+  height: 22px;
+
+  border: 1px solid white;
+  background-color: black;
+
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  image-rendering: pixelated;
+
+  opacity: 0.25;
+  transition: all 0.15s ease;
+}
+
+/* LOCKED (Dead / inactive) */
+
+.achievement-icon.locked {
+  filter: grayscale(100%);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+/* UNLOCKED 😈 */
+
+.achievement-icon.unlocked {
+  opacity: 1;
+  filter: none;
+}
+
+/* HOVER ANIMATION 😈🔥 */
+
+.achievement-icon.unlocked:hover {
+
+  transform: scale(1.15);
+  filter: brightness(1.4);
+
+  animation: achievementPulse 0.6s ease-in-out infinite;
+}
+
+@keyframes achievementPulse {
+  0%, 100% { transform: scale(1.15); }
+  50% { transform: scale(1.22); }
+}
+
+
+.achievement-icon.unlocked:hover {
+  animation:
+    achievementPulse 0.6s ease-in-out infinite,
+    iconGlitch 0.12s infinite;
+}
+
+@keyframes iconGlitch {
+  0% { transform: scale(1.15) translate(0); }
+  25% { transform: scale(1.15) translate(-1px, 1px); }
+  50% { transform: scale(1.15) translate(1px, -1px); }
+  75% { transform: scale(1.15) translate(-1px, 0); }
+  100% { transform: scale(1.15) translate(0); }
+}
+#achievementBar {
+
+  opacity: 0;
+  transform: translateY(10px);
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+/* WHEN REALITY ACKNOWLEDGES PROGRESS 😈 */
+
+#achievementBar.visible {
+
+  opacity: 1;
+  transform: translateY(0);
+
+  pointer-events: auto;
+}
+.terminal-corrupt {
+
+  color: white;
+  opacity: 0.35;
+
+  filter: blur(0.3px);
+
+  animation: corruptFlicker 0.12s infinite;
+}
+
+.corrupt-fade {
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+@keyframes corruptFlicker {
+
+  0% { transform: translate(0); }
+  25% { transform: translate(-1px, 0); }
+  50% { transform: translate(1px, 0); }
+  75% { transform: translate(-0.5px, 0); }
+  100% { transform: translate(0); }
+}
+.ritual-spacer {
+  height: 10px;
+}
+#achTeddy     { background-image: url("teddy.png"); }
+#achMap       { background-image: url("map.png"); }
+#achFood      { background-image: url("food.png"); }
+#achSpain     { background-image: url("spain.png"); }
+#achMusic     { background-image: url("music.png"); }
+#achMiata     { background-image: url("miata.png"); }
+#achDoor      { background-image: url("door.png"); }
+#achJellyfish { background-image: url("jellyfish.png"); }
+#achClown     { background-image: url("clown.png"); }

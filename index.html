@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RITUAL_OS</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.ico">
+<link rel="icon" type="image/png" href="favicon.png">
+
+</head>
+
+<body>
+
+<!-- ================= BOOT SCREEN ================= -->
+
+<div id="bootScreen">
+  <div id="bootText"></div>
+  <img id="bootJelly" src="jellyfish.gif">
+</div>
+
+<!-- ================= OS LAYER ================= -->
+
+<div id="osLayer">
+
+  <!-- ===== DESKTOP ===== -->
+
+  <div id="desktop">
+
+    <!-- Background Effects -->
+    <div class="jellyfish-container"></div>
+
+    <!-- ICON LAYER -->
+ <div id="iconLayer">
+
+  <!-- ritual.exe ICON -->
+  <div class="desktop-icon" id="ritualIcon">
+    <img class="icon-gif" src="ritual.gif">
+    <div>ritual.exe</div>
+  </div>
+
+  <!-- help.txt ICON -->
+  <div class="desktop-icon hidden" id="helpIcon">
+    <img class="icon-gif" src="help.gif">
+    <div>help.txt</div>
+  </div>
+
+</div>
+
+<div class="desktop-icon hidden" id="mapIcon">
+  <img class="icon-gif" src="map.gif">
+  <div>map.txt</div>
+</div>
+
+
+<div class="window utility-window hidden" id="helpWindow">
+  <div class="titlebar">help.txt</div>
+  <div class="content help-content">
+    <pre>
+╔══════════════════════════════╗
+║        RITUAL_OS HELP        ║
+╠══════════════════════════════╣
+
+MOVEMENT
+────────────
+go / walk / move / run
+
+left    → left / l
+right   → right / r
+up      → up / forward / u
+down    → down / back / d
+
+
+ACTIONS
+────────────
+look / see / observe / inspect
+touch / feel
+take / grab / pick
+smell
+taste
+
+FORMAT
+────────────
+verb + target
+
+example:
+look sigil
+touch walls
+go left
+
+╚══════════════════════════════╝
+    </pre>
+  </div>
+</div>
+
+
+</div>
+
+
+    </div>
+
+    <!-- TERMINAL WINDOW -->
+    <div class="window minimized" id="termWindow">
+     <div class="titlebar">gatuna_ai</div>
+
+      <div class="content" id="terminal">
+        creating gatuna_ai...
+      </div>
+    </div>
+
+    <!-- GAME WINDOW -->
+<div class="window minimized" id="gameWindow">
+  <div class="titlebar">ritual.exe</div>
+
+  <div class="content ritual-content">
+
+    <div id="text"></div>
+
+    <div class="input-row">
+      <span>&gt;</span>
+      <input id="commandInput" type="text">
+    </div>
+
+  </div>
+</div>
+
+
+    <!-- NOTE WINDOW -->
+    <div class="window minimized" id="noteWindow">
+      <div class="titlebar">log.txt</div>
+      <div class="content" id="noteContent"></div>
+    </div>
+
+  </div>
+
+<div class="window utility-window hidden" id="mapWindow">
+  <div class="titlebar">map.txt</div>
+  <div class="content">
+    <pre id="mapContent">
+Map not yet deciphered...
+    </pre>
+  </div>
+</div>
+
+<div id="achievementBar">
+
+  <div class="achievement-icon locked" id="achTeddy" data-tooltip="The Teddy"></div>
+  <div class="achievement-icon locked" id="achMap" data-tooltip="Cartographic Memory"></div>
+  <div class="achievement-icon locked" id="achFood" data-tooltip="The Untouched Meal"></div>
+  <div class="achievement-icon locked" id="achSpain" data-tooltip="Echoes of Spain"></div>
+  <div class="achievement-icon locked" id="achMusic" data-tooltip="The Music Room"></div>
+  <div class="achievement-icon locked" id="achMiata" data-tooltip="The Miata"></div>
+  <div class="achievement-icon locked" id="achDoor" data-tooltip="The Door"></div>
+  <div class="achievement-icon locked" id="achJellyfish" data-tooltip="The Jellyfish"></div>
+  <div class="achievement-icon locked" id="achClown" data-tooltip="The Clown"></div>
+
+</div>
+
+  <!-- ===== TASKBAR ===== -->
+
+  <div id="taskbar">
+
+    <div id="startButton" class="task">
+      <img class="start-jelly" src="jellyfish.gif">
+      Start
+    </div>
+<div class="task hidden" id="termTask">terminal</div>
+<div class="task hidden" id="ritualTask">ritual.exe</div>
+<div class="task hidden" id="helpTask">
+  help.txt
+</div>
+
+
+    <div class="task right" id="clock"></div>
+
+  </div>
+
+</div>
+
+<!-- ================= START MENU ================= -->
+
+<div id="startMenu" class="hidden">
+  <div class="menu-item" data-action="terminal">terminal</div>
+  <div class="menu-item" data-action="ritual">ritual.exe</div>
+  <div class="menu-divider"></div>
+  <div class="menu-item" data-action="shutdown">shutdown</div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
